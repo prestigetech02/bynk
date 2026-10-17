@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
+import { Footer } from "@/components/footer/Footer";
 import { Header } from "@/components/header/Header";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { brand } from "@/lib/brand";
+import {
+  organizationJsonLd,
+  siteConfig,
+  websiteJsonLd,
+} from "@/lib/seo";
 import "./globals.css";
 
 const geistMono = Geist_Mono({
@@ -10,34 +18,61 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "BYNK Advisory",
-    template: "%s | BYNK Advisory",
+    default: `${brand.name} | Strategic Advisory for Financial Institutions`,
+    template: `%s | ${brand.name}`,
   },
-  description:
-    "Strategic advisory for financial institutions and fintech companies navigating technology, innovation, and complex disputes.",
-  applicationName: "BYNK Advisory",
-  keywords: [
-    "BYNK Advisory",
-    "financial institutions",
-    "fintech",
-    "AI advisory",
-    "litigation strategy",
-    "innovation risk",
-    "technology governance",
-  ],
+  description: siteConfig.description,
+  applicationName: brand.name,
+  keywords: [...siteConfig.keywords],
+  authors: [{ name: brand.name, url: siteConfig.url }],
+  creator: brand.name,
+  publisher: brand.name,
+  category: "Business Consulting",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "BYNK Advisory",
-    description:
-      "Strategic advisory for financial institutions and fintech companies navigating technology, innovation, and complex disputes.",
+    title: `${brand.name} | Strategic Advisory for Financial Institutions`,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: brand.name,
+    locale: siteConfig.locale,
     type: "website",
-    siteName: "BYNK Advisory",
+    images: [
+      {
+        url: brand.logo.src,
+        alt: brand.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${brand.name} | Strategic Advisory for Financial Institutions`,
+    description: siteConfig.description,
+    images: [brand.logo.src],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: brand.logo.src,
+    apple: brand.logo.src,
   },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${geistMono.variable} h-full antialiased`}>
+    <html lang="en-CA" className={`${geistMono.variable} h-full antialiased`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -54,9 +89,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         className="flex min-h-full flex-col"
         style={{ fontFamily: '"Google Sans", sans-serif' }}
       >
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <SmoothScroll />
         <Header />
         <main className="flex-1">{children}</main>
+        <Footer />
       </body>
     </html>
   );

@@ -1,10 +1,13 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 type StrategyButtonProps = {
   href?: string;
   label?: string;
   className?: string;
   onClick?: () => void;
+  /** When set, renders a native button (e.g. form submit) instead of a link. */
+  type?: "button" | "submit" | "reset";
 };
 
 function ArrowIcon({ className }: { className?: string }) {
@@ -28,19 +31,9 @@ function ArrowIcon({ className }: { className?: string }) {
   );
 }
 
-export function StrategyButton({
-  href = "/contact",
-  label = "Book a Strategy",
-  className = "",
-  onClick,
-}: StrategyButtonProps) {
+function ButtonInner({ label }: { label: string }) {
   return (
-    <Link
-      href={href}
-      onClick={onClick}
-      className={`bynk-cta ${className}`.trim()}
-      style={{ fontFamily: '"Google Sans", sans-serif' }}
-    >
+    <>
       <span className="bynk-cta__label">
         <span className="bynk-cta__label-track">
           <span className="bynk-cta__label-line">{label}</span>
@@ -57,6 +50,32 @@ export function StrategyButton({
           <ArrowIcon className="bynk-cta__arrow-icon bynk-cta__arrow-icon--in" />
         </span>
       </span>
+    </>
+  );
+}
+
+export function StrategyButton({
+  href = "/contact",
+  label = "Book a Strategy",
+  className = "",
+  onClick,
+  type,
+}: StrategyButtonProps) {
+  const classes = `bynk-cta ${className}`.trim();
+  const style = { fontFamily: '"Google Sans", sans-serif' } as const;
+  const inner: ReactNode = <ButtonInner label={label} />;
+
+  if (type) {
+    return (
+      <button type={type} onClick={onClick} className={classes} style={style}>
+        {inner}
+      </button>
+    );
+  }
+
+  return (
+    <Link href={href} onClick={onClick} className={classes} style={style}>
+      {inner}
     </Link>
   );
 }

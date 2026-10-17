@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { StrategyButton } from "@/components/header/StrategyButton";
 import { CountUp } from "@/components/motion/CountUp";
 import { Reveal } from "@/components/motion/Reveal";
@@ -75,8 +76,22 @@ export function About() {
               <p className="text-[1.05rem] leading-[1.85] text-[#3d4b5c] sm:text-[1.15rem]">
                 BYNK helps financial institutions navigate complex change, emerging
                 technology and high-stakes disputes by combining legal judgment,
-                strategic thinking and innovation. We turn uncertainty into practical
-                decisions, stronger systems and better outcomes.
+                strategic thinking and innovation. Explore our{" "}
+                <Link
+                  href="/services"
+                  className="font-semibold text-[#12499d] underline underline-offset-2"
+                >
+                  advisory services
+                </Link>{" "}
+                or{" "}
+                <Link
+                  href="/contact"
+                  className="font-semibold text-[#12499d] underline underline-offset-2"
+                >
+                  contact the team
+                </Link>{" "}
+                to turn uncertainty into practical decisions, stronger systems and
+                better outcomes.
               </p>
 
               <div className="mt-8">

@@ -39,6 +39,61 @@ html.lenis body {
   height: auto;
 }
 
+.bynk-marquee__track {
+  gap: 1.5rem;
+  padding-inline: 0.5rem;
+  animation: bynk-marquee-scroll 36s linear infinite;
+}
+
+@media (min-width: 640px) {
+  .bynk-marquee__track {
+    gap: 2rem;
+  }
+}
+
+.bynk-marquee__word {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.bynk-marquee__word--light,
+.bynk-marquee__word--dark {
+  color: #fff;
+}
+
+.bynk-marquee__burst-wrap {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.bynk-marquee__burst {
+  flex-shrink: 0;
+  animation: bynk-marquee-spin 8s linear infinite;
+}
+
+@keyframes bynk-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes bynk-marquee-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 html {
   scroll-behavior: auto;
 }
@@ -81,6 +136,11 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .bynk-header.is-scrolled {
+    animation: none;
+  }
+
+  .bynk-marquee__track,
+  .bynk-marquee__burst {
     animation: none;
   }
 }
@@ -191,6 +251,107 @@ body {
   }
 }
 
+.bynk-dropcap::first-letter {
+  float: left;
+  padding-right: 0.14em;
+  padding-top: 0.08em;
+  color: #4eb6ee;
+  font-size: 3.35em;
+  font-weight: 700;
+  line-height: 0.8;
+}
+
+.bynk-service-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  overflow: hidden;
+  border: 1px solid #d7eaf7;
+  border-radius: 0.35rem;
+  padding: 0.9rem 0.9rem;
+  color: #1a2433;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration: none;
+  transition: border-color 0.35s ease;
+}
+
+.bynk-service-nav.is-active,
+.bynk-service-nav:hover {
+  border-color: transparent;
+}
+
+.bynk-service-nav__fill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: #0c2f66;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bynk-service-nav__label,
+.bynk-service-nav__arrow {
+  position: relative;
+  z-index: 1;
+  transition:
+    color 0.65s ease,
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bynk-service-nav__arrow {
+  flex-shrink: 0;
+  color: #9aa8b8;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.bynk-service-nav:hover .bynk-service-nav__fill,
+.bynk-service-nav.is-active .bynk-service-nav__fill {
+  transform: scaleX(1);
+}
+
+.bynk-service-nav:hover .bynk-service-nav__label,
+.bynk-service-nav.is-active .bynk-service-nav__label {
+  color: #fff;
+}
+
+.bynk-service-nav:hover .bynk-service-nav__arrow,
+.bynk-service-nav.is-active .bynk-service-nav__arrow {
+  color: #4eb6ee;
+  transform: translateX(0.3rem);
+}
+
+.bynk-contact-icon {
+  display: flex;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: #3b82f6;
+  color: #fff;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.bynk-contact-icon__glyph {
+  display: inline-flex;
+}
+
+.group:hover .bynk-contact-icon {
+  background: #4eb6ee;
+  transform: scale(1.08);
+}
+
+.group:hover .bynk-contact-icon__glyph {
+  animation: bynk-icon-spin 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
 .bynk-mega-panel {
   pointer-events: auto;
   animation: bynk-mega-in 0.18s ease-out;
@@ -218,6 +379,7 @@ body {
   height: 3rem;
   max-width: 100%;
   padding: 0 0.375rem 0 1.25rem;
+  border: none;
   border-radius: 0.3rem;
   background: #3b82f6;
   color: #fff;
@@ -225,6 +387,7 @@ body {
   font-weight: 500;
   line-height: 1;
   text-decoration: none;
+  cursor: pointer;
   overflow: hidden;
   transition: background-color var(--cta-duration) var(--cta-ease);
 }
@@ -319,8 +482,24 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bynk-icon-btn:hover .bynk-icon-btn__glyph {
+  .bynk-icon-btn:hover .bynk-icon-btn__glyph,
+  .group:hover .bynk-contact-icon__glyph {
     animation: none;
+  }
+
+  .group:hover .bynk-contact-icon {
+    transform: none;
+  }
+
+  .bynk-service-nav__fill,
+  .bynk-service-nav__label,
+  .bynk-service-nav__arrow {
+    transition: none;
+  }
+
+  .bynk-service-nav:hover .bynk-service-nav__arrow,
+  .bynk-service-nav.is-active .bynk-service-nav__arrow {
+    transform: none;
   }
 
   .bynk-cta,
