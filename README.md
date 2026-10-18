@@ -1,6 +1,6 @@
 # BYNK Advisory
 
-Next.js site for BYNK Advisory — strategic advisory for financial institutions and fintech companies navigating technology, innovation, and complex disputes.
+Next.js site for BYNK Advisory: strategic advisory for financial institutions and fintech companies navigating technology, innovation, and complex disputes.
 
 ## Stack
 

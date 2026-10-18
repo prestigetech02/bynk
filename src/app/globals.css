@@ -52,18 +52,11 @@ html.lenis body {
 }
 
 .bynk-marquee__word {
-  font-size: 34px;
   font-weight: 700;
   letter-spacing: -0.04em;
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
-  color: #fff;
-}
-
-.bynk-marquee__word--light,
-.bynk-marquee__word--dark {
-  color: #fff;
 }
 
 .bynk-marquee__burst-wrap {
@@ -74,6 +67,64 @@ html.lenis body {
 .bynk-marquee__burst {
   flex-shrink: 0;
   animation: bynk-marquee-spin 8s linear infinite;
+}
+
+/* Homepage band: large, light-themed (not the dark footer strip) */
+.bynk-marquee--home {
+  background: #ffffff;
+  border-top: 1px solid #e8eef4;
+  border-bottom: 1px solid #e8eef4;
+}
+
+.bynk-marquee--home .bynk-marquee__track {
+  gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .bynk-marquee--home .bynk-marquee__track {
+    gap: 2.75rem;
+  }
+}
+
+.bynk-marquee--home .bynk-marquee__word {
+  font-size: clamp(3.25rem, 8.5vw, 6.75rem);
+  font-weight: 700;
+}
+
+.bynk-marquee--home .bynk-marquee__word--light {
+  color: #69c1f0;
+}
+
+.bynk-marquee--home .bynk-marquee__word--dark {
+  color: #5b7a9a;
+}
+
+.bynk-marquee--home .bynk-marquee__burst-wrap {
+  color: #9bc4e0;
+}
+
+.bynk-marquee--home .bynk-marquee__burst {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+@media (min-width: 640px) {
+  .bynk-marquee--home .bynk-marquee__burst {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+/* Footer strip (non-home pages): compact all-white */
+.bynk-marquee--footer .bynk-marquee__word,
+.bynk-marquee--footer .bynk-marquee__word--light,
+.bynk-marquee--footer .bynk-marquee__word--dark {
+  font-size: 34px;
+  color: #fff;
+}
+
+.bynk-marquee--footer .bynk-marquee__burst-wrap {
+  color: #fff;
 }
 
 @keyframes bynk-marquee-scroll {
@@ -91,6 +142,35 @@ html.lenis body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.bynk-chat-dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: #5b6b7f;
+  animation: bynk-chat-bounce 1.1s ease-in-out infinite;
+}
+
+.bynk-chat-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.bynk-chat-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes bynk-chat-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
   }
 }
 
@@ -140,7 +220,8 @@ body {
   }
 
   .bynk-marquee__track,
-  .bynk-marquee__burst {
+  .bynk-marquee__burst,
+  .bynk-chat-dot {
     animation: none;
   }
 }
@@ -368,7 +449,7 @@ body {
   }
 }
 
-/* Strategy CTA — text slide + arrow swap */
+/* Strategy CTA: text slide + arrow swap */
 .bynk-cta {
   --cta-duration: 0.45s;
   --cta-ease: cubic-bezier(0.22, 1, 0.36, 1);

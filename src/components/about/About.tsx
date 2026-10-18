@@ -30,7 +30,7 @@ const stats: Array<{
   {
     end: null,
     label:
-      "problems solved across silos—not handed off between advisors who never meet",
+      "problems solved across silos, not handed off between advisors who never meet",
   },
 ];
 

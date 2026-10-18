@@ -103,7 +103,7 @@ export function Practice() {
           </Reveal>
           <Reveal delay={160} from="up" duration={1200} className="mt-4">
             <p className="max-w-xl text-base leading-relaxed text-[#5b6b7f]">
-              Legal judgment, technology fluency, and litigation insight—applied
+              Legal judgment, technology fluency, and litigation insight, applied
               where financial institutions face their hardest problems.
             </p>
           </Reveal>

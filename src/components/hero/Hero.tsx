@@ -54,7 +54,7 @@ export function Hero() {
         <Reveal delay={460} duration={1300} from="up" className="mt-5">
           <p className="max-w-xl text-[clamp(0.98rem,1.35vw,1.125rem)] leading-relaxed text-white/90">
             We help financial institutions and fintech companies navigate
-            technology, innovation, and complex disputes—turning uncertainty into
+            technology, innovation, and complex disputes, turning uncertainty into
             practical decisions, stronger systems, and better outcomes.
           </p>
         </Reveal>

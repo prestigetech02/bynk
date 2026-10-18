@@ -10,7 +10,7 @@ export const brand = {
   mission:
     "To help financial institutions make better decisions at the intersection of technology, innovation, law and risk.",
   vision:
-    "To redefine how financial institutions use legal and risk expertise—not simply to respond to problems, but to design better businesses.",
+    "To redefine how financial institutions use legal and risk expertise, not simply to respond to problems, but to design better businesses.",
   philosophy: "Every dispute is data. Every risk is a design problem.",
   colors: {
     navy: "#12499D",

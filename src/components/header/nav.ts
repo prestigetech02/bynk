@@ -27,7 +27,7 @@ export const navItems: NavItem[] = [
       links: [
         {
           label: "About BYNK",
-          href: "/#about",
+          href: "/company/about",
           description: "Who we are and how we sit at the intersections that matter.",
         },
         {

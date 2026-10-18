@@ -52,19 +52,28 @@ function MarqueeItem({ word, tone }: { word: string; tone: "light" | "dark" }) {
       >
         {word}
       </span>
-      <span className="bynk-marquee__burst-wrap text-white">
+      <span className="bynk-marquee__burst-wrap">
         <BurstIcon />
       </span>
     </span>
   );
 }
 
-export function WordMarquee() {
+type WordMarqueeProps = {
+  /** Homepage band uses dual-tone words; footer strip is all-white. */
+  variant?: "home" | "footer";
+};
+
+export function WordMarquee({ variant = "home" }: WordMarqueeProps) {
   const sequence = [...words, ...words];
 
   return (
     <div
-      className="bynk-marquee overflow-hidden py-6"
+      className={
+        variant === "footer"
+          ? "bynk-marquee bynk-marquee--footer overflow-hidden py-6"
+          : "bynk-marquee bynk-marquee--home overflow-hidden py-14 sm:py-20"
+      }
       aria-label="Practice focus areas"
       style={{ fontFamily: '"Google Sans", sans-serif' }}
     >

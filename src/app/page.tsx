@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { About } from "@/components/about/About";
 import { Hero } from "@/components/hero/Hero";
+import { WordMarquee } from "@/components/marquee/WordMarquee";
 import { Practice } from "@/components/practice/Practice";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { WhyChooseUs } from "@/components/why/WhyChooseUs";
@@ -33,6 +34,7 @@ export default function Home() {
       <Practice />
       <About />
       <WhyChooseUs />
+      <WordMarquee variant="home" />
     </>
   );
 }

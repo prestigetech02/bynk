@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { WordMarquee } from "@/components/marquee/WordMarquee";
+import { FooterMarquee } from "@/components/marquee/FooterMarquee";
 import { brand } from "@/lib/brand";
 import { services } from "@/lib/services";
 
 const primaryLinks = [
   { label: "Home", href: "/" },
-  { label: "About BYNK", href: "/#about" },
+  { label: "About BYNK", href: "/company/about" },
   { label: "Our Services", href: "/services" },
   { label: "Reach Us", href: "/contact" },
   { label: "Privacy Policy", href: "/privacy" },
@@ -167,7 +167,7 @@ export function Footer() {
                     : ""}
               </span>
             ))}
-            —helping banks and fintech operators turn uncertainty into practical
+            , helping banks and fintech operators turn uncertainty into practical
             decisions, stronger systems, and better outcomes.{" "}
             <Link
               href="/contact"
@@ -179,9 +179,7 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="mt-8">
-          <WordMarquee />
-        </div>
+        <FooterMarquee />
 
         <div className="mt-4 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-[48rem] text-[0.75rem] leading-relaxed text-white/45">

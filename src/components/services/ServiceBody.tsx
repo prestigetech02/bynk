@@ -39,14 +39,14 @@ export function ServiceBody({ service }: ServiceBodyProps) {
               <p className="bynk-dropcap">
                 At BYNK, {service.title.toLowerCase()} is never only about systems,
                 statutes, or slides. We sit with your leaders, listen carefully, and
-                help your teams face complex change as a human challenge—so the people
+                help your teams face complex change as a human challenge, so the people
                 carrying the risk feel seen, supported, and ready to decide.
               </p>
               <p>
                 We bring legal judgment, technology fluency, and practical empathy into
                 the same conversation. That is how BYNK turns uncertainty into clarity:
                 not by distancing you from the problem, but by walking through it with
-                you—toward stronger systems, calmer teams, and better outcomes.
+                you, toward stronger systems, calmer teams, and better outcomes.
               </p>
             </div>
 

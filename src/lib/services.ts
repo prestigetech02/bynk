@@ -24,7 +24,7 @@ export const services: Service[] = [
       "AI strategy, governance, and responsible adoption frameworks for financial institutions and fintech operators.",
     seoTitle: "Technology & AI Advisory for Banks & Fintech",
     seoDescription:
-      "BYNK Advisory helps financial institutions and fintech companies adopt AI responsibly—with governance, technology strategy, and human judgment.",
+      "BYNK Advisory helps financial institutions and fintech companies adopt AI responsibly, with governance, technology strategy, and human judgment.",
     keywords: [
       "AI advisory for banks",
       "fintech AI governance",
@@ -37,11 +37,11 @@ export const services: Service[] = [
     heroImageAlt: "Abstract AI network globe with circuit pathways",
     whyChoose: {
       intro:
-        "BYNK helps your people adopt AI with clarity and care—so technology serves judgment, trust, and the teams who use it every day.",
+        "BYNK helps your people adopt AI with clarity and care, so technology serves judgment, trust, and the teams who use it every day.",
       points: [
         "Guidance shaped around the real questions your leaders and operators are asking.",
         "AI strategies designed with your people, culture, and risk appetite in mind.",
-        "Human judgment beside technical fluency—so decisions feel owned, not outsourced.",
+        "Human judgment beside technical fluency, so decisions feel owned, not outsourced.",
         "Practical frameworks that protect customers, colleagues, and institutional trust.",
       ],
     },
@@ -64,7 +64,7 @@ export const services: Service[] = [
     imageAlt: "Legal books and litigation strategy setting",
     whyChoose: {
       intro:
-        "BYNK stands with your leadership when disputes feel personal, urgent, and unclear—turning pressure into a path your people can follow.",
+        "BYNK stands with your leadership when disputes feel personal, urgent, and unclear, turning pressure into a path your people can follow.",
       points: [
         "Advice rooted in the human stakes behind every claim, not only the paperwork.",
         "Strategies built around your team’s capacity, appetite, and institutional realities.",
@@ -80,7 +80,7 @@ export const services: Service[] = [
       "Horizon scanning, scenario planning, and innovation governance for complex change programs.",
     seoTitle: "Innovation Risk Sprint for Banks & Fintech",
     seoDescription:
-      "BYNK Advisory runs innovation risk sprints that help institutions move fast without flying blind—scenario planning, horizon scanning, and governance.",
+      "BYNK Advisory runs innovation risk sprints that help institutions move fast without flying blind: scenario planning, horizon scanning, and governance.",
     keywords: [
       "innovation risk sprint",
       "fintech innovation governance",
@@ -91,7 +91,7 @@ export const services: Service[] = [
     imageAlt: "Leadership team collaborating on innovation strategy",
     whyChoose: {
       intro:
-        "BYNK helps innovators and risk leaders move together—so ambition does not leave people exposed, and caution does not stall progress.",
+        "BYNK helps innovators and risk leaders move together, so ambition does not leave people exposed, and caution does not stall progress.",
       points: [
         "Sprints focused on the tensions your teams actually feel between speed and safety.",
         "Scenarios designed around your institution’s people, products, and obligations.",
@@ -118,7 +118,7 @@ export const services: Service[] = [
     imageAlt: "Professional workplace support conversation",
     whyChoose: {
       intro:
-        "BYNK treats workplace mental health as both a human duty and an institutional risk—supporting people while protecting the organization that employs them.",
+        "BYNK treats workplace mental health as both a human duty and an institutional risk, supporting people while protecting the organization that employs them.",
       points: [
         "Recommendations grounded in real employee experiences and manager realities.",
         "Strategies tailored to your culture, obligations, and leadership capacity.",

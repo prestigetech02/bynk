@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer/Footer";
 import { Header } from "@/components/header/Header";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { SupportChat } from "@/components/support/SupportChat";
 import { brand } from "@/lib/brand";
 import {
   organizationJsonLd,
@@ -65,8 +66,14 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: brand.logo.src,
-    apple: brand.logo.src,
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico",
   },
 };
 
@@ -94,6 +101,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <SupportChat />
       </body>
     </html>
   );

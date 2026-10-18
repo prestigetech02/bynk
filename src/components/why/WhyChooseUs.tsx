@@ -17,7 +17,7 @@ const reasons = [
   {
     number: "03",
     title: "Trusted By Global Brands",
-    body: "We’ve partnered with some of the world’s most influential companies — delivering impact at scale, across borders.",
+    body: "We’ve partnered with some of the world’s most influential companies, delivering impact at scale, across borders.",
   },
 ] as const;
 
