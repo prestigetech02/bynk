@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PageHero } from "@/components/layout/PageHero";
+import { defaultPageHeroAlt, defaultPageHeroImage, PageHero } from "@/components/layout/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { services } from "@/lib/services";
@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildMetadata({
   title: "Our Services",
   description:
-    "Explore BYNK Advisory services: Technology & AI Advisory, Litigation & Disputes Strategy, Innovation Risk Sprint, and Workplace Mental Health Risk.",
+    "Explore BYNK Advisory's six practices: litigation and disputes, finance and business, innovation, technology and AI, people and workplace, and hospitality.",
   path: "/services",
   keywords: [
     "BYNK services",
@@ -17,6 +17,8 @@ export const metadata: Metadata = buildMetadata({
     "AI advisory services",
     "litigation strategy services",
   ],
+  image: defaultPageHeroImage,
+  imageAlt: defaultPageHeroAlt,
 });
 
 export default function ServicesPage() {
@@ -45,8 +47,8 @@ export default function ServicesPage() {
       >
         <div className="mx-auto max-w-[1400px]">
           <p className="max-w-[60ch] text-[1.05rem] leading-relaxed text-[#5b6b7f]">
-            BYNK works at the intersections that matter for financial
-            institutions and fintech operators.{" "}
+            Six advisory practices, from disputes and finance to technology,
+            people, and hospitality.{" "}
             <Link
               href="/contact"
               className="font-medium text-[#12499d] underline underline-offset-2"
@@ -83,6 +85,28 @@ export default function ServicesPage() {
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={120} from="up" duration={1000} className="mt-8">
+            <Link
+              href="/services/specialist-advisory"
+              className="block rounded-[1.15rem] bg-[#07111f] px-6 py-7 text-white transition-colors hover:bg-[#0c2f66] sm:px-8"
+            >
+              <p className="text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-[#4eb6ee]">
+                Across the practices
+              </p>
+              <h3 className="mt-2 text-[1.35rem] font-bold tracking-[-0.02em]">
+                Specialist Advisory
+              </h3>
+              <p className="mt-3 max-w-[62ch] text-[0.98rem] leading-relaxed text-white/75">
+                Crisis and sensitive matters, strategic decision intelligence,
+                independent reviews, and fractional advisory for work that does
+                not sit in a single practice.
+              </p>
+              <span className="mt-4 inline-block text-[0.85rem] font-semibold text-[#4eb6ee]">
+                Learn more →
+              </span>
+            </Link>
+          </Reveal>
         </div>
       </section>
     </>

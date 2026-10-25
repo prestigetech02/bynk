@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { brand } from "@/lib/brand";
+import { industries } from "@/lib/industries";
 import { services, type Service } from "@/lib/services";
 
 export const siteConfig = {
@@ -34,6 +35,7 @@ type BuildMetadataInput = {
   path: string;
   keywords?: string[];
   image?: string;
+  imageAlt?: string;
   type?: "website" | "article";
   noIndex?: boolean;
 };
@@ -44,6 +46,7 @@ export function buildMetadata({
   path,
   keywords = [],
   image = brand.logo.src,
+  imageAlt = brand.name,
   type = "website",
   noIndex = false,
 }: BuildMetadataInput): Metadata {
@@ -71,7 +74,7 @@ export function buildMetadata({
       images: [
         {
           url: imageUrl,
-          alt: brand.name,
+          alt: imageAlt,
         },
       ],
     },
@@ -176,6 +179,23 @@ export function serviceJsonLd(service: Service) {
   };
 }
 
+export function aboutPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: `About ${brand.name}`,
+    url: absoluteUrl("/company/about"),
+    description:
+      "BYNK helps financial institutions make better decisions at the intersection of technology, innovation, law and risk.",
+    mainEntity: {
+      "@type": "Organization",
+      name: brand.name,
+      url: siteConfig.url,
+      email: brand.contact.email,
+    },
+  };
+}
+
 export function contactPageJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -195,9 +215,24 @@ export function contactPageJsonLd() {
 export const marketingRoutes = [
   { path: "/", changeFrequency: "weekly" as const, priority: 1 },
   { path: "/company/about", changeFrequency: "monthly" as const, priority: 0.85 },
+  { path: "/company/leadership", changeFrequency: "monthly" as const, priority: 0.7 },
+  { path: "/company/client-impact", changeFrequency: "monthly" as const, priority: 0.7 },
+  { path: "/company/join-us", changeFrequency: "monthly" as const, priority: 0.6 },
   { path: "/services", changeFrequency: "weekly" as const, priority: 0.9 },
+  {
+    path: "/services/specialist-advisory",
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  },
+  { path: "/industries", changeFrequency: "monthly" as const, priority: 0.8 },
+  ...industries.map((industry) => ({
+    path: `/industries/${industry.slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  })),
   { path: "/contact", changeFrequency: "monthly" as const, priority: 0.8 },
   { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
+  { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
   ...services.map((service) => ({
     path: `/services/${service.slug}`,
     changeFrequency: "monthly" as const,

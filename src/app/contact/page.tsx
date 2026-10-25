@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ContactHero } from "@/components/contact/ContactHero";
+import { defaultPageHeroAlt, defaultPageHeroImage } from "@/components/layout/PageHero";
 import { ContactSection } from "@/components/contact/ContactSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
@@ -18,6 +19,8 @@ export const metadata: Metadata = buildMetadata({
     "book strategy session",
     "Markham consulting contact",
   ],
+  image: defaultPageHeroImage,
+  imageAlt: defaultPageHeroAlt,
 });
 
 export default function ContactPage() {

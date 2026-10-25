@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Reveal } from "@/components/motion/Reveal";
+import { services } from "@/lib/services";
 
 type PracticeItem = {
   number: string;
@@ -10,36 +11,13 @@ type PracticeItem = {
   imageAlt: string;
 };
 
-const practices: PracticeItem[] = [
-  {
-    number: "01",
-    title: "Technology & AI Advisory",
-    href: "/services/technology-ai",
-    image: "/practice/tech-ai.jpg",
-    imageAlt: "Artificial intelligence and technology systems",
-  },
-  {
-    number: "02",
-    title: "Litigation & Disputes Strategy",
-    href: "/services/litigation-disputes",
-    image: "/practice/litigation.jpg",
-    imageAlt: "Legal books and litigation strategy setting",
-  },
-  {
-    number: "03",
-    title: "Innovation Risk Sprint",
-    href: "/services/innovation-risk",
-    image: "/practice/innovation.jpg",
-    imageAlt: "Leadership team collaborating on innovation strategy",
-  },
-  {
-    number: "04",
-    title: "Workplace Mental Health Risk",
-    href: "/services/mental-health-risk",
-    image: "/practice/mental-health.jpg",
-    imageAlt: "Professional workplace support conversation",
-  },
-];
+const practices: PracticeItem[] = services.map((service, index) => ({
+  number: String(index + 1).padStart(2, "0"),
+  title: service.title,
+  href: `/services/${service.slug}`,
+  image: service.image,
+  imageAlt: service.imageAlt,
+}));
 
 function PracticeCard({ item }: { item: PracticeItem }) {
   return (

@@ -50,6 +50,8 @@ export function ServiceBody({ service }: ServiceBodyProps) {
               </p>
             </div>
 
+            <ServiceOfferings service={service} />
+
             <ServiceWhyChoose service={service} />
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -71,5 +73,43 @@ export function ServiceBody({ service }: ServiceBodyProps) {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+function ServiceOfferings({ service }: { service: Service }) {
+  return (
+    <div className="mt-12 max-w-[68ch]">
+      <h3 className="text-[clamp(1.45rem,2.4vw,1.85rem)] font-bold leading-[1.2] tracking-[-0.03em] text-[#0c2f66]">
+        What this practice covers
+      </h3>
+      <div className="mt-8 space-y-8">
+        {service.offerings.map((group) => (
+          <section key={group.title}>
+            <h4 className="text-[1.12rem] font-bold tracking-[-0.02em] text-[#080a12]">
+              {group.title}
+            </h4>
+            {group.intro ? (
+              <p className="mt-2 text-[1rem] leading-relaxed text-[#3d4b5c]">
+                {group.intro}
+              </p>
+            ) : null}
+            <ul className="mt-3 space-y-2">
+              {group.items.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-3 text-[0.98rem] leading-relaxed text-[#3d4b5c]"
+                >
+                  <span
+                    className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-[#4eb6ee]"
+                    aria-hidden
+                  />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+      </div>
+    </div>
   );
 }

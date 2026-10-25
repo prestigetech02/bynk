@@ -112,7 +112,9 @@ function MegaPanelContent({ item }: { item: NavItem }) {
             <Link
               key={link.href}
               href={link.href}
-              className="group/link rounded-sm px-4 py-3 transition-colors hover:bg-bynk-sky-soft"
+              className={`group/link rounded-sm px-4 py-3 transition-colors hover:bg-bynk-sky-soft ${
+                link.span === "full" ? "sm:col-span-2" : ""
+              }`}
             >
               <span className="block text-[15px] font-semibold text-bynk-navy-deep transition-colors group-hover/link:text-bynk-navy">
                 {link.label}
@@ -153,9 +155,16 @@ function MegaPanelContent({ item }: { item: NavItem }) {
 
 function isItemActive(pathname: string, item: NavItem) {
   if (item.href === "/") return pathname === "/";
-  if (pathname === item.href || pathname.startsWith(`${item.href}/`)) return true;
-  return item.mega?.links.some(
-    (link) => pathname === link.href || pathname.startsWith(`${link.href}/`),
+  if (
+    item.href &&
+    (pathname === item.href || pathname.startsWith(`${item.href}/`))
+  ) {
+    return true;
+  }
+  return (
+    item.mega?.links.some(
+      (link) => pathname === link.href || pathname.startsWith(`${link.href}/`),
+    ) ?? false
   );
 }
 
@@ -271,23 +280,45 @@ export function Header() {
                   }
                 }}
               >
-                <Link
-                  href={item.href}
-                  className={`inline-flex items-center gap-1.5 rounded-sm px-3.5 py-2.5 text-[14px] font-medium uppercase tracking-[0.08em] transition-colors ${
-                    active || megaOpen
-                      ? "bg-white text-[#0b1220] shadow-sm"
-                      : "text-white/90 hover:bg-white/10 hover:text-white"
-                  }`}
-                  style={{ fontFamily: '"Google Sans", sans-serif' }}
-                  aria-expanded={hasMega ? megaOpen : undefined}
-                  aria-haspopup={hasMega ? "true" : undefined}
-                  onFocus={() => {
-                    if (hasMega) openMega(item.label);
-                  }}
-                >
-                  {item.label}
-                  {hasMega ? <Chevron open={megaOpen} /> : null}
-                </Link>
+                {item.href ? (
+                  <Link
+                    href={item.href}
+                    className={`inline-flex items-center gap-1.5 rounded-sm px-3.5 py-2.5 text-[14px] font-medium uppercase tracking-[0.08em] transition-colors ${
+                      active || megaOpen
+                        ? "bg-white text-[#0b1220] shadow-sm"
+                        : "text-white/90 hover:bg-white/10 hover:text-white"
+                    }`}
+                    style={{ fontFamily: '"Google Sans", sans-serif' }}
+                    aria-expanded={hasMega ? megaOpen : undefined}
+                    aria-haspopup={hasMega ? "true" : undefined}
+                    onFocus={() => {
+                      if (hasMega) openMega(item.label);
+                    }}
+                  >
+                    {item.label}
+                    {hasMega ? <Chevron open={megaOpen} /> : null}
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    className={`inline-flex items-center gap-1.5 rounded-sm px-3.5 py-2.5 text-[14px] font-medium uppercase tracking-[0.08em] transition-colors ${
+                      active || megaOpen
+                        ? "bg-white text-[#0b1220] shadow-sm"
+                        : "text-white/90 hover:bg-white/10 hover:text-white"
+                    }`}
+                    style={{ fontFamily: '"Google Sans", sans-serif' }}
+                    aria-expanded={megaOpen}
+                    aria-haspopup="true"
+                    onClick={() => {
+                      if (megaOpen) setActiveMega(null);
+                      else openMega(item.label);
+                    }}
+                    onFocus={() => openMega(item.label)}
+                  >
+                    {item.label}
+                    <Chevron open={megaOpen} />
+                  </button>
+                )}
               </div>
             );
           })}
@@ -354,7 +385,7 @@ export function Header() {
               const open = openSection === item.label;
               const active = isItemActive(pathname, item);
 
-              if (!item.mega) {
+              if (!item.mega && item.href) {
                 return (
                   <Link
                     key={item.label}

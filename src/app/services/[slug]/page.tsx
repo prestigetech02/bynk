@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { PageHero } from "@/components/layout/PageHero";
+import { defaultPageHeroAlt, defaultPageHeroImage, PageHero } from "@/components/layout/PageHero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ServiceBody } from "@/components/services/ServiceBody";
 import { getService, services } from "@/lib/services";
@@ -31,7 +31,8 @@ export async function generateMetadata({
     description: service.seoDescription,
     path: `/services/${service.slug}`,
     keywords: service.keywords,
-    image: service.heroImage || service.image,
+    image: service.heroImage || defaultPageHeroImage,
+    imageAlt: service.heroImage ? service.heroImageAlt : defaultPageHeroAlt,
   });
 }
 

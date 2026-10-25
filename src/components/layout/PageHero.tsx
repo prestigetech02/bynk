@@ -19,6 +19,9 @@ type PageHeroProps = {
   titleSpacing?: boolean;
 };
 
+export const defaultPageHeroImage = "/contact/office-collaboration.png";
+export const defaultPageHeroAlt = "BYNK Advisory";
+
 const leftOverlay =
   "linear-gradient(90deg, rgba(12,47,102,0.78) 0%, rgba(7,17,31,0.58) 22%, rgba(7,17,31,0.28) 42%, rgba(7,17,31,0.08) 58%, rgba(7,17,31,0) 68%)";
 
@@ -28,8 +31,8 @@ const rightOverlay =
 export function PageHero({
   title,
   crumbs,
-  imageSrc = "/contact/office-collaboration.png",
-  imageAlt = "BYNK Advisory",
+  imageSrc = defaultPageHeroImage,
+  imageAlt = defaultPageHeroAlt,
   headingId = "page-heading",
   overlay = "left",
   titleSpacing = false,

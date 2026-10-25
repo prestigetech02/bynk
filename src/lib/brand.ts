@@ -33,9 +33,11 @@ export const brand = {
     instagramUrl: "https://instagram.com/bynk.ca",
   },
   practices: [
-    "Technology & AI Advisory",
-    "Litigation & Disputes Strategy",
-    "Innovation Risk Sprint",
-    "Workplace Mental Health Risk",
+    "Litigation & Disputes",
+    "Finance & Business",
+    "Innovation & Transformation",
+    "Technology & AI",
+    "People & Workplace",
+    "Hospitality",
   ],
 } as const;

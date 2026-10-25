@@ -1,12 +1,17 @@
+import { services } from "@/lib/services";
+
 export type MegaLink = {
   label: string;
   href: string;
   description?: string;
+  /** Stretch the link across both columns of the mega menu. */
+  span?: "full";
 };
 
 export type NavItem = {
   label: string;
-  href: string;
+  /** Omit when the item only opens a mega menu. */
+  href?: string;
   mega?: {
     links: MegaLink[];
     image: {
@@ -22,7 +27,6 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   {
     label: "Our company",
-    href: "/company",
     mega: {
       links: [
         {
@@ -60,25 +64,17 @@ export const navItems: NavItem[] = [
     href: "/services",
     mega: {
       links: [
+        ...services.map((service) => ({
+          label: service.title,
+          href: `/services/${service.slug}`,
+          description: service.menuDescription,
+        })),
         {
-          label: "Technology & AI Advisory",
-          href: "/services/technology-ai",
-          description: "AI strategy, governance, and responsible adoption frameworks.",
-        },
-        {
-          label: "Litigation & Disputes Strategy",
-          href: "/services/litigation-disputes",
-          description: "Pre-litigation strategy and dispute-risk intelligence.",
-        },
-        {
-          label: "Innovation Risk Sprint",
-          href: "/services/innovation-risk",
-          description: "Horizon scanning, scenario planning, and innovation governance.",
-        },
-        {
-          label: "Workplace Mental Health Risk",
-          href: "/services/mental-health-risk",
-          description: "Mental-health law, accommodation, and reputational risk.",
+          label: "Specialist Advisory",
+          href: "/services/specialist-advisory",
+          description:
+            "Crisis support, decision intelligence, reviews, and fractional advisory.",
+          span: "full",
         },
       ],
       image: {

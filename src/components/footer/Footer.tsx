@@ -7,9 +7,13 @@ import { services } from "@/lib/services";
 const primaryLinks = [
   { label: "Home", href: "/" },
   { label: "About BYNK", href: "/company/about" },
+  { label: "Our Leadership", href: "/company/leadership" },
+  { label: "Client Impact", href: "/company/client-impact" },
+  { label: "Join Us", href: "/company/join-us" },
   { label: "Our Services", href: "/services" },
   { label: "Reach Us", href: "/contact" },
   { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
 ] as const;
 
 const socialLinks = [
