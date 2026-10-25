@@ -43,5 +43,6 @@ export default function AboutPage() {
       <AboutStory />
       <AboutApproach />
       <AboutChallenges />
+    </>
   );
 }
