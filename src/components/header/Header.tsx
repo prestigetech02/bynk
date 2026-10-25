@@ -385,7 +385,8 @@ export function Header() {
               const open = openSection === item.label;
               const active = isItemActive(pathname, item);
 
-              if (!item.mega && item.href) {
+              if (!item.mega) {
+                if (!item.href) return null;
                 return (
                   <Link
                     key={item.label}
@@ -399,6 +400,8 @@ export function Header() {
                   </Link>
                 );
               }
+
+              const mega = item.mega;
 
               return (
                 <div key={item.label} className="border-b border-white/10 py-2">
@@ -415,7 +418,7 @@ export function Header() {
                   </button>
                   {open ? (
                     <ul className="space-y-1 pb-3">
-                      {item.mega.links.map((link) => (
+                      {mega.links.map((link) => (
                         <li key={link.href}>
                           <Link
                             href={link.href}
