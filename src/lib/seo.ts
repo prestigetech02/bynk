@@ -24,6 +24,9 @@ export const siteConfig = {
   ],
 } as const;
 
+/** Share card for the main site when a page has no hero image of its own. */
+export const defaultShareImage = "/og-default.png";
+
 export function absoluteUrl(path = "/") {
   const normalized = path.startsWith("/") ? path : `/${path}`;
   return `${siteConfig.url}${normalized === "/" ? "" : normalized}`;
@@ -45,7 +48,7 @@ export function buildMetadata({
   description,
   path,
   keywords = [],
-  image = brand.logo.src,
+  image = defaultShareImage,
   imageAlt = brand.name,
   type = "website",
   noIndex = false,
@@ -75,6 +78,7 @@ export function buildMetadata({
         {
           url: imageUrl,
           alt: imageAlt,
+          ...(image === defaultShareImage ? { width: 1200, height: 630 } : {}),
         },
       ],
     },

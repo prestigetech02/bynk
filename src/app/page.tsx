@@ -5,7 +5,7 @@ import { WordMarquee } from "@/components/marquee/WordMarquee";
 import { Practice } from "@/components/practice/Practice";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { WhyChooseUs } from "@/components/why/WhyChooseUs";
-import { breadcrumbJsonLd, buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata, defaultShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   ...buildMetadata({
@@ -18,6 +18,8 @@ export const metadata: Metadata = {
       "bank consulting",
       "fintech advisory Markham",
     ],
+    image: defaultShareImage,
+    imageAlt: "Bynk",
   }),
   title: {
     absolute: "BYNK Advisory | Strategic Advisory for Financial Institutions",

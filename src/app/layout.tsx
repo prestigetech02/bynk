@@ -7,6 +7,7 @@ import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { SupportChat } from "@/components/support/SupportChat";
 import { brand } from "@/lib/brand";
 import {
+  defaultShareImage,
   organizationJsonLd,
   siteConfig,
   websiteJsonLd,
@@ -43,8 +44,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: brand.logo.src,
-        alt: brand.name,
+        url: defaultShareImage,
+        width: 1200,
+        height: 630,
+        alt: "Bynk",
       },
     ],
   },
@@ -52,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${brand.name} | Strategic Advisory for Financial Institutions`,
     description: siteConfig.description,
-    images: [brand.logo.src],
+    images: [defaultShareImage],
   },
   robots: {
     index: true,
