@@ -8,13 +8,14 @@ import { brand } from "@/lib/brand";
 export const metadata: Metadata = buildMetadata({
   title: "Our Leadership",
   description:
-    "Oyindamola Aladejana is Founder and Principal of BYNK Advisory, a finance and technology lawyer advising financial institutions on disputes, litigation strategy, and emerging technology.",
+    "Meet BYNK Advisory’s leadership: Oyindamola Aladejana, Founder and Principal, and Jamila Garba Ibrahim, Lead Legal Consultant for Africa and North America.",
   path: "/company/leadership",
   keywords: [
     "Oyindamola Aladejana",
+    "Jamila Garba Ibrahim",
     "BYNK Advisory founder",
     "finance and technology lawyer Canada",
-    "litigation strategy financial institutions",
+    "corporate governance legal consultant",
   ],
   image: "/about/0x0.jpg",
   imageAlt: "A compass beside a torn paper reading Leadership",
@@ -49,6 +50,29 @@ export default function LeadershipPage() {
               {
                 "@type": "CollegeOrUniversity",
                 name: "University of Buckingham",
+              },
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Jamila Garba Ibrahim",
+            jobTitle: "Lead Legal Consultant, Africa & North America",
+            image: absoluteUrl("/about/Jamila.jpeg"),
+            url: absoluteUrl("/company/leadership"),
+            worksFor: {
+              "@type": "Organization",
+              name: brand.name,
+              url: siteConfig.url,
+            },
+            alumniOf: [
+              {
+                "@type": "CollegeOrUniversity",
+                name: "University of Lagos",
+              },
+              {
+                "@type": "CollegeOrUniversity",
+                name: "Nile University of Nigeria",
               },
             ],
           },

@@ -7,6 +7,7 @@ function BurstIcon() {
   const inner = 2.4;
   const outer = 12;
   const halfWidth = 0.28;
+  const fmt = (value: number) => value.toFixed(4);
 
   return (
     <svg
@@ -30,7 +31,7 @@ function BurstIcon() {
         return (
           <polygon
             key={i}
-            points={`${tipX},${tipY} ${baseX + px},${baseY + py} ${baseX - px},${baseY - py}`}
+            points={`${fmt(tipX)},${fmt(tipY)} ${fmt(baseX + px)},${fmt(baseY + py)} ${fmt(baseX - px)},${fmt(baseY - py)}`}
             fill="currentColor"
           />
         );
