@@ -2,44 +2,56 @@
 
 import { useState, type FormEvent } from "react";
 import { StrategyButton } from "@/components/header/StrategyButton";
-import { brand } from "@/lib/brand";
+import { createClient } from "@/lib/supabase/client";
 
 const fieldClass =
   "w-full rounded-[0.45rem] border border-[#d7e3ef] bg-white px-4 py-3.5 text-[0.95rem] text-[#0c2f66] outline-none transition placeholder:text-[#9aa8b8] focus:border-[#4EB6EE] focus:ring-2 focus:ring-[#4EB6EE]/25";
 
 export function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const phone = String(data.get("phone") ?? "").trim();
     const subject = String(data.get("subject") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
 
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      phone ? `Phone: ${phone}` : null,
-      "",
-      message,
-    ]
-      .filter(Boolean)
-      .join("\n");
+    setStatus("sending");
+    setError(null);
 
-    const mailto = `mailto:${brand.contact.email}?subject=${encodeURIComponent(
-      subject || "BYNK Advisory inquiry",
-    )}&body=${encodeURIComponent(body)}`;
+    try {
+      const supabase = createClient();
+      const { error: insertError } = await supabase
+        .from("contact_submissions")
+        .insert({
+          name,
+          email,
+          phone: phone || null,
+          subject: subject || "BYNK Advisory inquiry",
+          message,
+          source: "contact",
+        });
 
-    window.location.href = mailto;
-    setStatus("sent");
+      if (insertError) throw insertError;
+
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+      setError("Something went wrong. Please try again or email us directly.");
+    }
   }
 
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={(event) => void handleSubmit(event)}
       className="space-y-4"
       style={{ fontFamily: '"Google Sans", sans-serif' }}
       noValidate
@@ -114,11 +126,17 @@ export function ContactForm() {
       </label>
 
       <div className="flex flex-wrap items-center gap-4 pt-2">
-        <StrategyButton type="submit" label="Send Message" />
+        <StrategyButton
+          type="submit"
+          label={status === "sending" ? "Sending…" : "Send Message"}
+        />
         {status === "sent" ? (
           <p className="text-[0.9rem] text-[#5b6b7f]">
-            Opening your email client to reach {brand.contact.email}…
+            Thanks — your message was received. We’ll be in touch soon.
           </p>
+        ) : null}
+        {status === "error" && error ? (
+          <p className="text-[0.9rem] text-[#b42318]">{error}</p>
         ) : null}
       </div>
     </form>

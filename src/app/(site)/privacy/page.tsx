@@ -60,15 +60,15 @@ export default function PrivacyPage() {
             Information we collect
           </h2>
           <p>
-            If you use the contact or service request forms, your browser opens an
-            email to {brand.contact.email}. We receive your name, email address,
-            phone number, organization, and message only if you send that email.
-            We may also receive the same details if you write to us directly.
+            If you use the contact or service request forms, we store your name,
+            email address, phone number (if provided), subject, and message so we
+            can reply. We may also receive the same details if you write to us
+            directly at {brand.contact.email}.
           </p>
           <p>
-            The on-site assistant keeps the conversation in your browser for that
-            visit. It does not send the chat to BYNK. If you want a person to
-            see a question, use the contact form or email us.
+            The on-site support chat stores the conversation so BYNK can answer
+            questions and, if you choose “Talk to a person,” continue the chat
+            with a human advisor. Chat content is used only for customer support.
           </p>
           <p>
             Our site may receive ordinary technical information from your browser,

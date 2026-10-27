@@ -79,10 +79,10 @@ export default function TermsPage() {
             material.
           </p>
           <p>
-            Contact forms open an email in your own mail program. We receive the
-            message only if you send it. The on-site assistant answers from
-            information on this website and does not replace a conversation with
-            the firm.
+            Contact and service forms submit your message to BYNK through our
+            site so we can reply. The on-site assistant answers from information
+            on this website and does not replace a conversation with the firm.
+            You may also ask to talk to a person in live chat.
           </p>
 
           <h2 className="pt-2 text-[1.35rem] font-bold text-[#0c2f66]">

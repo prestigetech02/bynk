@@ -2,8 +2,8 @@
 
 import { useState, type FormEvent } from "react";
 import { StrategyButton } from "@/components/header/StrategyButton";
-import { brand } from "@/lib/brand";
 import { services } from "@/lib/services";
+import { createClient } from "@/lib/supabase/client";
 
 const fieldClass =
   "w-full rounded-[0.35rem] border border-[#d7eaf7] bg-white px-3.5 py-3 text-[0.92rem] text-[#0c2f66] outline-none transition placeholder:text-[#9aa8b8] focus:border-[#4EB6EE] focus:ring-2 focus:ring-[#4EB6EE]/25";
@@ -13,11 +13,15 @@ type RequestServiceFormProps = {
 };
 
 export function RequestServiceForm({ currentSlug }: RequestServiceFormProps) {
-  const [status, setStatus] = useState<"idle" | "sent">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
+  const [error, setError] = useState<string | null>(null);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const serviceSlug = String(data.get("service") ?? "").trim();
@@ -25,20 +29,30 @@ export function RequestServiceForm({ currentSlug }: RequestServiceFormProps) {
     const serviceTitle =
       services.find((item) => item.slug === serviceSlug)?.title ?? serviceSlug;
 
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Requested service: ${serviceTitle}`,
-      "",
-      message,
-    ].join("\n");
+    setStatus("sending");
+    setError(null);
 
-    const mailto = `mailto:${brand.contact.email}?subject=${encodeURIComponent(
-      `Service request: ${serviceTitle}`,
-    )}&body=${encodeURIComponent(body)}`;
+    try {
+      const supabase = createClient();
+      const { error: insertError } = await supabase
+        .from("contact_submissions")
+        .insert({
+          name,
+          email,
+          subject: `Service request: ${serviceTitle}`,
+          message,
+          source: "service",
+          service_slug: serviceSlug,
+        });
 
-    window.location.href = mailto;
-    setStatus("sent");
+      if (insertError) throw insertError;
+
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+      setError("Something went wrong. Please try again or email us directly.");
+    }
   }
 
   return (
@@ -53,7 +67,11 @@ export function RequestServiceForm({ currentSlug }: RequestServiceFormProps) {
         Tell us what you need and BYNK will follow up to start the conversation.
       </p>
 
-      <form onSubmit={handleSubmit} className="mt-5 space-y-3.5" noValidate>
+      <form
+        onSubmit={(event) => void handleSubmit(event)}
+        className="mt-5 space-y-3.5"
+        noValidate
+      >
         <label className="block">
           <span className="mb-1.5 block text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-[#0c2f66]">
             Full name
@@ -117,13 +135,19 @@ export function RequestServiceForm({ currentSlug }: RequestServiceFormProps) {
         </label>
 
         <div className="pt-1">
-          <StrategyButton type="submit" label="Request Service" />
+          <StrategyButton
+            type="submit"
+            label={status === "sending" ? "Sending…" : "Request Service"}
+          />
         </div>
 
         {status === "sent" ? (
           <p className="text-[0.85rem] text-[#5b6b7f]">
-            Opening your email client to reach {brand.contact.email}…
+            Thanks — your request was received. We’ll follow up soon.
           </p>
+        ) : null}
+        {status === "error" && error ? (
+          <p className="text-[0.85rem] text-[#b42318]">{error}</p>
         ) : null}
       </form>
     </div>

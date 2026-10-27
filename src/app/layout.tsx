@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono } from "next/font/google";
-import { Footer } from "@/components/footer/Footer";
-import { Header } from "@/components/header/Header";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { SmoothScroll } from "@/components/motion/SmoothScroll";
-import { SupportChat } from "@/components/support/SupportChat";
 import { brand } from "@/lib/brand";
-import {
-  defaultShareImage,
-  organizationJsonLd,
-  siteConfig,
-  websiteJsonLd,
-} from "@/lib/seo";
+import { defaultShareImage, siteConfig } from "@/lib/seo";
 import "./globals.css";
 
 const geistMono = Geist_Mono({
@@ -99,12 +89,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         className="flex min-h-full flex-col"
         style={{ fontFamily: '"Google Sans", sans-serif' }}
       >
-        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
-        <SmoothScroll />
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <SupportChat />
+        {children}
       </body>
     </html>
   );
