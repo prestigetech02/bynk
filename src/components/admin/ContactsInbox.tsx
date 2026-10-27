@@ -6,8 +6,6 @@ import type {
   ContactSubmission,
   ContactSubmissionStatus,
 } from "@/lib/supabase/types";
-import { SignOutButton } from "@/components/admin/SignOutButton";
-
 function formatWhen(iso: string) {
   return new Intl.DateTimeFormat("en-CA", {
     dateStyle: "medium",
@@ -79,7 +77,7 @@ export function ContactsInbox() {
     <div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-[1.55rem] font-bold tracking-tight text-[#0c2f66]">
+          <h1 className="text-[1.35rem] font-bold tracking-tight text-[#0c2f66]">
             Contact submissions
           </h1>
           <p className="mt-1 text-[0.95rem] text-[#5b6b7f]">
@@ -106,7 +104,6 @@ export function ContactsInbox() {
           >
             Refresh
           </button>
-          <SignOutButton />
         </div>
       </div>
 

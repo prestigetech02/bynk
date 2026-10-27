@@ -8,7 +8,6 @@ import {
   useState,
   type FormEvent,
 } from "react";
-import { SignOutButton } from "@/components/admin/SignOutButton";
 import { createClient } from "@/lib/supabase/client";
 import type {
   ChatMessage,
@@ -286,23 +285,20 @@ export function LiveChatConsole() {
     <div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="text-[1.55rem] font-bold tracking-tight text-[#0c2f66]">
-            Live chat
+          <h1 className="text-[1.35rem] font-bold tracking-tight text-[#0c2f66]">
+            Live chat inbox
           </h1>
           <p className="mt-1 text-[0.95rem] text-[#5b6b7f]">
             Waiting chats need a takeover. After that you can reply live.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <button
-            type="button"
-            onClick={() => void loadSessions()}
-            className="rounded-[0.45rem] border border-[#d7e3ef] bg-white px-3 py-2 text-[0.88rem] font-medium text-[#0c2f66] hover:bg-[#f4f8fc]"
-          >
-            Refresh
-          </button>
-          <SignOutButton />
-        </div>
+        <button
+          type="button"
+          onClick={() => void loadSessions()}
+          className="rounded-[0.45rem] border border-[#d7e3ef] bg-white px-3 py-2 text-[0.88rem] font-medium text-[#0c2f66] hover:bg-[#f4f8fc]"
+        >
+          Refresh
+        </button>
       </div>
 
       {error ? (

@@ -173,11 +173,17 @@ create policy "Anyone can read chat messages"
 -- ---------------------------------------------------------------------------
 -- Realtime
 -- ---------------------------------------------------------------------------
+alter table public.contact_submissions replica identity full;
 alter table public.chat_sessions replica identity full;
 alter table public.chat_messages replica identity full;
 
 do $$
 begin
+  begin
+    alter publication supabase_realtime add table public.contact_submissions;
+  exception
+    when duplicate_object then null;
+  end;
   begin
     alter publication supabase_realtime add table public.chat_sessions;
   exception

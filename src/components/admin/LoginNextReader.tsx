@@ -7,7 +7,9 @@ export function LoginNextReader() {
   const searchParams = useSearchParams();
   const raw = searchParams.get("next");
   const nextPath =
-    raw && raw.startsWith("/admin") ? raw : "/admin/contacts";
+    raw && raw.startsWith("/admin") && raw !== "/admin/login"
+      ? raw
+      : "/admin";
 
   return <LoginForm nextPath={nextPath} />;
 }

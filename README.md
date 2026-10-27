@@ -30,16 +30,23 @@ npm start
 2. Copy `.env.local.example` to `.env.local` and set:
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `OPENAI_API_KEY` (server-only; powers smoother bot replies)
+   - optional `OPENAI_MODEL` (defaults to `gpt-4o-mini`)
 3. In the Supabase SQL editor, run [`supabase/schema.sql`](supabase/schema.sql).
 4. Confirm Realtime is enabled for `chat_sessions` and `chat_messages` (the SQL adds them to `supabase_realtime`).
 5. In **Authentication → Users**, create at least one user. Any authenticated user can sign in at `/admin/login`.
+
+Without `OPENAI_API_KEY`, the assistant falls back to simple keyword replies.
 
 ### What you get
 
 | Route | Purpose |
 |-------|---------|
 | `/admin/login` | Email/password sign-in |
+| `/admin` | Dashboard overview with contact + chat stats |
 | `/admin/contacts` | Contact + service form submissions |
 | `/admin/chat` | Live chat sessions, takeover, and agent replies |
+
+The admin shell includes a sidebar, header with logo, and realtime notification bell (new contacts, new chats, waiting handovers). If contacts were set up before notifications, also run [`supabase/realtime-contacts.sql`](supabase/realtime-contacts.sql).
 
 Visitors can use **Talk to a person** in the site chat widget. Sessions move to `waiting`; an agent **Take over**s in `/admin/chat` and replies appear live for the visitor.

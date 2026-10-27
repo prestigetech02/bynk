@@ -17,6 +17,25 @@ import type {
   ChatSessionStatus,
 } from "@/lib/supabase/types";
 
+async function requestBotReply(sessionId: string) {
+  const response = await fetch("/api/chat/reply", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ sessionId }),
+  });
+
+  const payload = (await response.json()) as {
+    message?: DbChatMessage;
+    error?: string;
+  };
+
+  if (!response.ok || !payload.message) {
+    throw new Error(payload.error ?? "Could not generate a reply");
+  }
+
+  return payload.message;
+}
+
 type UiMessage = {
   id: string;
   role: "assistant" | "user" | "agent" | "system";
@@ -64,7 +83,6 @@ export function SupportChat() {
 
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const replyTimerRef = useRef<number | null>(null);
   const sessionIdRef = useRef<string | null>(null);
   const statusRef = useRef<ChatSessionStatus>("bot");
 
@@ -294,14 +312,6 @@ export function SupportChat() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
-  useEffect(() => {
-    return () => {
-      if (replyTimerRef.current !== null) {
-        window.clearTimeout(replyTimerRef.current);
-      }
-    };
-  }, []);
-
   async function sendMessage(raw: string) {
     const text = raw.trim();
     if (!text || typing || busy) return;
@@ -331,32 +341,34 @@ export function SupportChat() {
       }
 
       setTyping(true);
-      if (replyTimerRef.current !== null) {
-        window.clearTimeout(replyTimerRef.current);
+      try {
+        const assistant = await requestBotReply(id);
+        setMessages((prev) => {
+          if (prev.some((message) => message.id === assistant.id)) return prev;
+          return [...prev, mapDbMessage(assistant)];
+        });
+      } catch {
+        try {
+          const fallback = await persistMessage(
+            "assistant",
+            buildBotReply(text),
+            id,
+          );
+          setMessages((prev) => [...prev, mapDbMessage(fallback)]);
+        } catch {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `assistant-local-${Date.now()}`,
+              role: "assistant",
+              text: buildBotReply(text),
+            },
+          ]);
+        }
+      } finally {
+        setTyping(false);
+        setBusy(false);
       }
-
-      replyTimerRef.current = window.setTimeout(() => {
-        void (async () => {
-          try {
-            const reply = buildBotReply(text);
-            const assistant = await persistMessage("assistant", reply, id);
-            setMessages((prev) => [...prev, mapDbMessage(assistant)]);
-          } catch {
-            setMessages((prev) => [
-              ...prev,
-              {
-                id: `assistant-local-${Date.now()}`,
-                role: "assistant",
-                text: buildBotReply(text),
-              },
-            ]);
-          } finally {
-            setTyping(false);
-            setBusy(false);
-            replyTimerRef.current = null;
-          }
-        })();
-      }, 900);
     } catch {
       setError("Could not send message. Please try again.");
       setBusy(false);
