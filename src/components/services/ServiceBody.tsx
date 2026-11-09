@@ -52,6 +52,28 @@ export function ServiceBody({ service }: ServiceBodyProps) {
 
             <ServiceOfferings service={service} />
 
+            {service.slug === "litigation-disputes" ? (
+              <aside className="mt-10 max-w-[68ch] rounded-[1.15rem] border border-[#d7e3ef] bg-white p-6 shadow-[0_8px_24px_rgba(12,47,102,0.04)] sm:p-7">
+                <p className="text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-[#12499d]">
+                  Platform
+                </p>
+                <h3 className="mt-2 text-[1.25rem] font-bold tracking-[-0.02em] text-[#080a12]">
+                  BYNK AI Litigation Intelligence
+                </h3>
+                <p className="mt-3 text-[1.02rem] leading-[1.75] text-[#3d4b5c]">
+                  Analyze complex banking, finance, and technology disputes with
+                  greater speed, precision, and clarity—turning dense litigation
+                  records into structured, source-referenced insights.
+                </p>
+                <Link
+                  href="/platform/litigation-intelligence"
+                  className="mt-4 inline-flex text-[0.9rem] font-semibold text-[#12499d] underline underline-offset-2 transition-colors hover:text-[#0c2f66]"
+                >
+                  Explore the platform
+                </Link>
+              </aside>
+            ) : null}
+
             <ServiceWhyChoose service={service} />
 
             <div className="mt-8 flex flex-wrap items-center gap-4">

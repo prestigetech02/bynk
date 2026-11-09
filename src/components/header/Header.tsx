@@ -107,12 +107,12 @@ function MegaPanelContent({ item }: { item: NavItem }) {
   return (
     <div className="overflow-hidden rounded-md border border-bynk-border bg-white shadow-[0_28px_70px_-24px_rgba(0,0,0,0.55)]">
       <div className="grid grid-cols-1 md:grid-cols-[1.15fr_0.85fr]">
-        <div className="grid gap-1 p-5 sm:grid-cols-2 sm:p-6">
+        <div className="grid items-start gap-1 p-5 sm:grid-cols-2 sm:p-6">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`group/link rounded-sm px-4 py-3 transition-colors hover:bg-bynk-sky-soft ${
+              className={`group/link self-start rounded-sm px-4 py-3 transition-colors hover:bg-bynk-sky-soft ${
                 link.span === "full" ? "sm:col-span-2" : ""
               }`}
             >
@@ -155,12 +155,23 @@ function MegaPanelContent({ item }: { item: NavItem }) {
 
 function isItemActive(pathname: string, item: NavItem) {
   if (item.href === "/") return pathname === "/";
-  if (
-    item.href &&
-    (pathname === item.href || pathname.startsWith(`${item.href}/`))
-  ) {
-    return true;
+
+  // Prefer the item's own section path so cross-links in a mega menu
+  // (e.g. Platform inside Services) do not mark the wrong tab active.
+  if (item.href) {
+    if (pathname === item.href || pathname.startsWith(`${item.href}/`)) {
+      return true;
+    }
+    const sectionRoot = `/${item.href.split("/").filter(Boolean)[0] ?? ""}`;
+    if (
+      sectionRoot !== "/" &&
+      (pathname === sectionRoot || pathname.startsWith(`${sectionRoot}/`))
+    ) {
+      return true;
+    }
+    return false;
   }
+
   return (
     item.mega?.links.some(
       (link) => pathname === link.href || pathname.startsWith(`${link.href}/`),

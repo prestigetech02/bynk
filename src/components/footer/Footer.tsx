@@ -11,6 +11,10 @@ const primaryLinks = [
   { label: "Client Impact", href: "/company/client-impact" },
   { label: "Join Us", href: "/company/join-us" },
   { label: "Our Services", href: "/services" },
+  {
+    label: "Litigation Intelligence",
+    href: "/platform/litigation-intelligence",
+  },
   { label: "Reach Us", href: "/contact" },
   { label: "Privacy Policy", href: "/privacy" },
   { label: "Terms of Service", href: "/terms" },

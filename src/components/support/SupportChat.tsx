@@ -419,6 +419,7 @@ export function SupportChat() {
             role="dialog"
             aria-modal="false"
             aria-label="BYNK support chat"
+            data-lenis-prevent
             className="flex h-[min(34rem,calc(100dvh-6.5rem))] w-[min(100vw-2rem,22.5rem)] flex-col overflow-hidden rounded-[1.15rem] border border-[#d7e3ef] bg-white shadow-[0_18px_50px_rgba(7,17,31,0.22)]"
           >
             <header className="flex items-center gap-3 bg-[#0c2f66] px-4 py-3.5 text-white">
@@ -453,7 +454,8 @@ export function SupportChat() {
 
             <div
               ref={listRef}
-              className="flex-1 space-y-3 overflow-y-auto bg-[#f4f8fc] px-3.5 py-4"
+              data-lenis-prevent
+              className="flex-1 space-y-3 overflow-y-auto overscroll-contain bg-[#f4f8fc] px-3.5 py-4"
             >
               {messages.map((message) => {
                 if (message.role === "system") {

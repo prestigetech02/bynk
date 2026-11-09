@@ -14,6 +14,14 @@ export function SmoothScroll() {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       touchMultiplier: 1.1,
+      // Let nested scroll areas (chat modal, etc.) take the wheel/trackpad.
+      allowNestedScroll: true,
+      prevent: (node) =>
+        Boolean(
+          node.closest(
+            "[data-lenis-prevent], [data-lenis-prevent-wheel]",
+          ),
+        ),
     });
 
     let frame = 0;

@@ -122,6 +122,27 @@ export const navItems: NavItem[] = [
     },
   },
   {
+    label: "Platform",
+    href: "/platform/litigation-intelligence",
+    mega: {
+      links: [
+        {
+          label: "Litigation Intelligence",
+          href: "/platform/litigation-intelligence",
+          description:
+            "AI-powered analysis of complex banking, finance, and technology disputes.",
+        },
+      ],
+      image: {
+        src: "/practice/tech-ai.jpg",
+        alt: "Technology and AI advisory workspace",
+        caption: "Litigation intelligence powered by AI.",
+        ctaLabel: "Explore the platform",
+        ctaHref: "/platform/litigation-intelligence",
+      },
+    },
+  },
+  {
     label: "Reach Us",
     href: "/contact",
   },

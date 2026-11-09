@@ -234,6 +234,11 @@ export const marketingRoutes = [
     changeFrequency: "monthly" as const,
     priority: 0.75,
   })),
+  {
+    path: "/platform/litigation-intelligence",
+    changeFrequency: "monthly" as const,
+    priority: 0.9,
+  },
   { path: "/contact", changeFrequency: "monthly" as const, priority: 0.8 },
   { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
